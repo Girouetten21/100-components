@@ -1,0 +1,80 @@
+.scroll-container {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+
+  .section {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    h2 {
+      color: white;
+      font-size: 6rem;
+      text-align: center;
+      z-index: 2;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      margin: 0;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      backdrop-filter: blur(8px);
+      transform: translateY(0);
+      transition: transform 0.5s ease-in-out;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    &.active {
+      opacity: 1;
+      z-index: 1;
+
+      h2 {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// Media queries para responsividad
+@media (max-width: 768px) {
+  .scroll-container {
+    .section {
+      h2 {
+        font-size: 3rem;
+        letter-spacing: 4px;
+        padding: 1.5rem;
+      }
+    }
+  }
+}
