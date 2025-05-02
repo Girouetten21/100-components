@@ -1,10 +1,10 @@
-import ScrollSections from './components/ScrollSections/ScrollSections'
+import FormAnimated from "./components/FormAnimated/FormAnimated";
 import './App.css'
 
 function App() {
   return (
     <>
-      <ScrollSections />
+      <FormAnimated />
     </>
   )
 }

@@ -1,0 +1,214 @@
+// Variables
+$columns: 12;
+$gap: 20px;
+$container-padding: 15px;
+
+// Colores
+$col-1-color: #ff6b6b;
+$col-2-color: #4ecdc4;
+$col-3-color: #45b7d1;
+$col-4-color: #96ceb4;
+
+$row-1-color: #ffd93d;
+$row-2-color: #6c5ce7;
+$row-3-color: #a8e6cf;
+$row-4-color: #ff8b94;
+
+// Modificadores de alineación
+$alignments: (
+  "start": flex-start,
+  "center": center,
+  "end": flex-end,
+);
+
+// Contenedor principal
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 $container-padding;
+  box-sizing: border-box;
+}
+
+// Sistema de Columnas
+.col-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// Definición de columnas
+.col-1,
+.col-2,
+.col-3,
+.col-4 {
+  box-sizing: border-box;
+  margin-bottom: $gap;
+
+  // Contenedor interno para el contenido
+  &__content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    // Alineación horizontal
+    &--left {
+      align-items: flex-start;
+      text-align: left;
+    }
+
+    &--center {
+      align-items: center;
+      text-align: center;
+    }
+
+    &--right {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    // Alineación vertical
+    &--top {
+      justify-content: flex-start;
+    }
+
+    &--middle {
+      justify-content: center;
+    }
+
+    &--bottom {
+      justify-content: flex-end;
+    }
+  }
+
+  // Elementos comunes dentro de las columnas
+  img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  p {
+    margin: 0;
+    line-height: 1.6;
+  }
+}
+
+.col-1 {
+  width: 100%;
+  background-color: $col-1-color;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.col-2 {
+  width: calc(50% - #{$gap/2});
+  background-color: $col-2-color;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.col-3 {
+  width: calc(33.333% - #{$gap * 2 / 3});
+  background-color: $col-3-color;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.col-4 {
+  width: calc(25% - #{$gap * 3 / 4});
+  background-color: $col-4-color;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+// Sistema de Filas
+.row-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+// Definición de filas
+.row-1,
+.row-2,
+.row-3,
+.row-4 {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.row-1 {
+  height: 100px;
+  background-color: $row-1-color;
+}
+
+.row-2 {
+  height: 200px;
+  background-color: $row-2-color;
+}
+
+.row-3 {
+  height: 300px;
+  background-color: $row-3-color;
+}
+
+.row-4 {
+  height: 400px;
+  background-color: $row-4-color;
+}
+
+// Estilos comunes
+.col-1,
+.col-2,
+.col-3,
+.col-4,
+.row-1,
+.row-2,
+.row-3,
+.row-4 {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+// Media queries
+@media (max-width: 768px) {
+  .col-2,
+  .col-3,
+  .col-4 {
+    width: 100%;
+  }
+}
+
+// Clases de utilidad para espaciado
+.mt-1 {
+  margin-top: 10px;
+}
+.mt-2 {
+  margin-top: 20px;
+}
+.mb-1 {
+  margin-bottom: 10px;
+}
+.mb-2 {
+  margin-bottom: 20px;
+}

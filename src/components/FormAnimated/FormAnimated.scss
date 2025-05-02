@@ -1,0 +1,105 @@
+$form-background: #e0e0e0; // Color de fondo del contenedor
+$form-border-color: #d0d0d0; // Color del borde del formulario
+$form-text-color: #333; // Color del texto
+$form-highlight-color: #0056b3; // Color de los detalles (Cambiado a azul más oscuro)
+
+$form-width: 350px; // Ancho del formulario
+$form-height: 320px; // Altura del formulario
+
+.form-container {
+  position: absolute; // Cambiar a absolute para centrar en relación al contenedor padre
+  top: 50%; // Posicionar en el centro verticalmente
+  left: 50%; // Posicionar en el centro horizontalmente
+  transform: translate(-50%, -50%); // Ajustar la posición para centrar
+  display: flex;
+  justify-content: center; // Centrar horizontalmente
+  align-items: center; // Centrar verticalmente
+  background-color: $form-background; // Color de fondo del contenedor
+  width: $form-width; // Ajustar el ancho al del formulario
+  height: $form-height; // Ajustar la altura al del formulario
+}
+
+.corner-box {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  background-color: $form-highlight-color; // Color de los cuadros
+  z-index: -1; // Asegura que los cuadros estén detrás del formulario
+
+  &.top-left {
+    top: -70px;
+    left: -50px;
+  }
+
+  &.top-right {
+    top: -70px;
+    right: -50px;
+  }
+
+  &.bottom-left {
+    bottom: -70px;
+    left: -50px;
+  }
+
+  &.bottom-right {
+    bottom: -70px;
+    right: -50px;
+  }
+}
+
+.login-form {
+  background-color: white; // Color de fondo del formulario
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  width: $form-width; // Ancho del formulario
+  height: $form-height; // Altura del formulario
+  position: relative; // Asegura que el formulario tenga un contexto de apilamiento
+
+  h2 {
+    text-align: center;
+    color: $form-text-color; // Color del texto del encabezado
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: $form-text-color; // Color del texto de las etiquetas
+    }
+
+    input {
+      width: 93%;
+      padding: 10px;
+      border: 1px solid $form-border-color; // Color del borde de los campos
+      border-radius: 5px;
+      font-size: 16px;
+
+      &:focus {
+        border-color: $form-highlight-color; // Color del borde al enfocar
+        outline: none;
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: $form-highlight-color; // Color de fondo del botón
+    color: white; // Color del texto del botón
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: darken(
+        $form-highlight-color,
+        10%
+      ); // Color del botón al pasar el mouse
+    }
+  }
+}
