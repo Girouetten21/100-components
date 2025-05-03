@@ -1,10 +1,10 @@
-import FormAnimated from "./components/FormAnimated/FormAnimated";
+import MangaReading from "./components/MangaReading/MangaReading";
 import './App.css'
 
 function App() {
   return (
     <>
-      <FormAnimated />
+      <MangaReading />
     </>
   )
 }

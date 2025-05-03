@@ -1,0 +1,60 @@
+.manga-reading-container {
+  padding: 20px;
+  // Ensure left alignment - remove any centering styles like margin: auto
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%; // Ensure it takes full width if needed for alignment
+  box-sizing: border-box; // Include padding in the element's total width
+}
+
+.manga-section {
+  margin-bottom: 40px; // Space between sections
+  text-align: left; // Ensure section content aligns left
+
+  &__title {
+    font-size: 2em; // Increased font size
+    margin-bottom: 15px;
+    color: #808080; // Changed section title color to dark grey
+    border-bottom: 2px solid #eee; // Separator line
+    padding-bottom: 5px;
+    text-align: left; // Explicitly align title to the left
+  }
+
+  &__viewport {
+    width: 100%; // Take full width of the section
+    overflow: hidden; // **Keep overflow: hidden to hide content outside the viewport**
+    cursor: default; // **Default cursor when not draggable**
+    // Removed padding from viewport
+    // Removed box-sizing from viewport
+
+    // **Added vertical padding for zoom space**
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+
+    // Hide native scrollbar
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    &.is-draggable {
+       cursor: grab; // **Grab cursor when draggable**
+    }
+
+    &:active {
+      cursor: grabbing; // Change cursor while dragging
+    }
+  }
+
+  &__cards-container {
+    display: flex; // Arrange cards horizontally
+    // GSAP Draggable will handle the positioning, no need for overflow-x: auto here
+    // The width will be determined by the total width of the flex items (MangaCards)
+    width: max-content; // Ensure the container is wide enough for all cards
+    // Removed negative margin
+    padding: 0 10px 15px 10px; // **Added horizontal padding to the cards container**
+    // Top, Right, Bottom, Left padding
+  }
+}
