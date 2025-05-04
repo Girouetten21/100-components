@@ -5,7 +5,7 @@ import './MangaCard.scss';
 interface MangaCardProps {
   title: string;
   imageUrl: string;
-  section: 'reading' | 'completed' | 'maybe'; // Add section prop
+  section: 'reading' | 'completed' | 'maybe';
 }
 
 const MangaCard: React.FC<MangaCardProps> = ({ title, imageUrl, section }) => {

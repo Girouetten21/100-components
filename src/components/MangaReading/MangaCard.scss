@@ -1,32 +1,38 @@
 .manga-card {
   width: 250px;
   height: 400px;
-  border: 1px solid #ccc; // Example border
-  border-radius: 10px; // Rounded corners
-  overflow: hidden; // Hide overflow for rounded corners
+  border: 1px solid #ffffff00;
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  margin-right: 20px; // Space between cards
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Subtle shadow
-  // Removed CSS transition for transform to avoid conflict with GSAP
-  cursor: pointer; // Indicate it's interactive
-  position: relative; // Added for z-index to work
-  z-index: 1; // Ensure cards have a base z-index
+  margin-right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  -webkit-user-drag: none; // Bloquear drag en WebKit
+  user-select: none; // Prevenir selección de texto
 
   &__image-container {
     width: 100%;
-    height: 350px; // Image height
-    overflow: hidden; // Ensure image respects container bounds
+    height: 350px;
+    overflow: hidden;
+    -webkit-user-drag: none;
+    user-select: none;
   }
 
   &__image {
     width: 100%;
     height: 100%;
-    object-fit: cover; // Cover the container while maintaining aspect ratio
+    object-fit: cover;
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
   }
 
   &__title {
-    height: 50px; // Remaining space for title (400 - 350)
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,31 +40,30 @@
     text-align: center;
     font-size: 1em;
     font-weight: bold;
-    color: #222; // Changed text color to a darker shade
-    background-color: #f9f9f9; // Default background color (will be overridden by background-image)
-    background-size: cover; // Cover the title area
-    background-position: center; // Center the background image
+    color: #222;
+    background-color: #f9f9f9;
+    background-size: cover;
+    background-position: center;
+    -webkit-user-drag: none;
+    user-select: none;
+    pointer-events: none;
   }
 
-  // Section specific backgrounds for the title area
   &--reading {
     .manga-card__title {
-      background-image: url('/img/BG_Reading.png'); // Placeholder path for Reading background
-      color: #414141; // White text for potentially dark background
+      color: #414141;
     }
   }
 
   &--completed {
     .manga-card__title {
-      background-image: url('/img/BG_Completed.png'); // Placeholder path for Completed background
-      color: #464646; // White text for potentially dark background
+      color: #464646;
     }
   }
 
   &--maybe {
     .manga-card__title {
-      background-image: url('/img/BG_Maybe.png'); // Placeholder path for Maybe background
-      color: #4d4d4d; // White text for potentially dark background
+      color: #4d4d4d;
     }
   }
 }
