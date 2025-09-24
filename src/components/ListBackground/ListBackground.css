@@ -1,0 +1,100 @@
+/* Contenedor externo para centrar el modal en la pantalla */
+.list-bg-outer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+/* Contenedor principal */
+.list-bg-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    background: transparent;
+}
+
+/* Fondo difuminado */
+.list-bg-blur {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    filter: blur(16px) brightness(0.7);
+    z-index: 0;
+}
+
+/* Lista */
+.list-bg-list {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+/* Título de la lista */
+.list-bg-title {
+    width: 100%;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #88888;
+    background: transparent;
+    border-radius: 16px 16px 0 0;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-text-stroke: 1px #000;
+    text-stroke: 1px #000;
+}
+
+/* Item de la lista */
+.list-bg-item {
+    width: 100%;
+    height: 79px;
+    padding: 0 24px;
+    margin: 0;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
+    background: transparent;
+    color: black;
+}
+
+.list-bg-item .list-bg-name {
+    color: #fff !important;
+    -webkit-text-stroke: 1px #000;
+    text-stroke: 1px #000;
+    transition: -webkit-text-stroke 0.2s, text-stroke 0.2s;
+}
+
+.list-bg-name {
+    text-align: left;
+}
+
+.list-bg-number {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
