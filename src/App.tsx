@@ -1,10 +1,10 @@
-import ListMenu from './components/ListMenu/ListMenu';
+import HorizontalScrollSection from './components/HorizontalScrollSection/HorizontalScrollSection';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <ListMenu />
+      <HorizontalScrollSection />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './ListMenu.css';
+import './ListHover.css';
 
-const ListMenu: React.FC = () => {
+const ListHover: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const gemas = [
@@ -65,4 +65,4 @@ const ListMenu: React.FC = () => {
   );
 };
 
-export default ListMenu;
+export default ListHover;
