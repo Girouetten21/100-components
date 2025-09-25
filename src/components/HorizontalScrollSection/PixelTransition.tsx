@@ -16,7 +16,7 @@ interface PixelTransitionProps {
 const PixelTransition: React.FC<PixelTransitionProps> = ({
   images = [],
   currentIndex = 0,
-  gridSize = 7,
+  gridSize = 21,
   pixelColor = 'currentColor',
   animationStepDuration = 0.3,
   className = '',
@@ -104,7 +104,7 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
     <div
       ref={containerRef}
       className={`pixelated-image-card ${className}`}
-      style={{ ...style, position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
+      style={{ ...style, position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto' }}
     >
       <div style={{ paddingTop: aspectRatio }} />
       <div
