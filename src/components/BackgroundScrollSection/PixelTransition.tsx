@@ -1,35 +1,37 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, CSSProperties } from 'react';
 import { gsap } from 'gsap';
 import './PixelTransition.css';
 
 interface PixelTransitionProps {
-  images: string[];
-  currentIndex: number;
+  firstContent: React.ReactNode;
+  secondContent: React.ReactNode;
   gridSize?: number;
   pixelColor?: string;
   animationStepDuration?: number;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
   aspectRatio?: string;
 }
 
 const PixelTransition: React.FC<PixelTransitionProps> = ({
-  images = [],
-  currentIndex = 0,
-  gridSize = 21,
+  firstContent,
+  secondContent,
+  gridSize = 7,
   pixelColor = 'currentColor',
   animationStepDuration = 0.3,
   className = '',
   style = {},
   aspectRatio = '100%'
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const pixelGridRef = useRef<HTMLDivElement>(null);
-  const activeRef = useRef<HTMLDivElement>(null);
-  const prevIndexRef = useRef(currentIndex);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const pixelGridRef = useRef<HTMLDivElement | null>(null);
+  const activeRef = useRef<HTMLDivElement | null>(null);
   const delayedCallRef = useRef<gsap.core.Tween | null>(null);
 
-  const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState<boolean>(false);
+
+  const isTouchDevice =
+    'ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches;
 
   useEffect(() => {
     const pixelGridEl = pixelGridRef.current;
@@ -53,16 +55,14 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
     }
   }, [gridSize, pixelColor]);
 
-  useEffect(() => {
-    if (prevIndexRef.current === currentIndex) return;
-
-    setIsActive(true);
+  const animatePixels = (activate: boolean): void => {
+    setIsActive(activate);
 
     const pixelGridEl = pixelGridRef.current;
     const activeEl = activeRef.current;
     if (!pixelGridEl || !activeEl) return;
 
-    const pixels = pixelGridEl.querySelectorAll('.pixelated-image-card__pixel');
+    const pixels = pixelGridEl.querySelectorAll<HTMLDivElement>('.pixelated-image-card__pixel');
     if (!pixels.length) return;
 
     gsap.killTweensOf(pixels);
@@ -85,8 +85,8 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
     });
 
     delayedCallRef.current = gsap.delayedCall(animationStepDuration, () => {
-      setIsActive(false);
-      prevIndexRef.current = currentIndex;
+      activeEl.style.display = activate ? 'block' : 'none';
+      activeEl.style.pointerEvents = activate ? 'none' : '';
     });
 
     gsap.to(pixels, {
@@ -98,44 +98,32 @@ const PixelTransition: React.FC<PixelTransitionProps> = ({
         from: 'random'
       }
     });
-  }, [currentIndex, animationStepDuration]);
+  };
+
+  const handleMouseEnter = (): void => {
+    if (!isActive) animatePixels(true);
+  };
+  const handleMouseLeave = (): void => {
+    if (isActive) animatePixels(false);
+  };
+  const handleClick = (): void => {
+    animatePixels(!isActive);
+  };
 
   return (
     <div
       ref={containerRef}
       className={`pixelated-image-card ${className}`}
-      style={{ ...style, position: 'absolute', top: 0, left: 0, width: '100%', height: 'auto' }}
+      style={style}
+      onMouseEnter={!isTouchDevice ? handleMouseEnter : undefined}
+      onMouseLeave={!isTouchDevice ? handleMouseLeave : undefined}
+      onClick={isTouchDevice ? handleClick : undefined}
     >
       <div style={{ paddingTop: aspectRatio }} />
-      <div
-        className="pixelated-image-card__default"
-        style={{
-          display: isActive ? 'none' : 'block',
-          width: '100%',
-          height: '100%',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundImage: `url(${images[prevIndexRef.current]})`,
-          position: 'absolute',
-          top: 0,
-          left: 0
-        }}
-      />
-      <div
-        className="pixelated-image-card__active"
-        ref={activeRef}
-        style={{
-          display: isActive ? 'block' : 'none',
-          width: '100%',
-          height: '100%',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundImage: `url(${images[currentIndex]})`,
-          position: 'absolute',
-          top: 0,
-          left: 0
-        }}
-      />
+      <div className="pixelated-image-card__default">{firstContent}</div>
+      <div className="pixelated-image-card__active" ref={activeRef}>
+        {secondContent}
+      </div>
       <div className="pixelated-image-card__pixels" ref={pixelGridRef} />
     </div>
   );

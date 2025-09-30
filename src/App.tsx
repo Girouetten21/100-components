@@ -1,10 +1,10 @@
-import HorizontalScrollSection from './components/HorizontalScrollSection/HorizontalScrollSection';
+import BackgroundScrollSection from './components/BackgroundScrollSection/BackgroundScrollSection';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <HorizontalScrollSection />
+      <BackgroundScrollSection />
     </div>
   );
 }
