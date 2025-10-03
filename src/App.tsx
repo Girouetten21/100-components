@@ -1,10 +1,10 @@
-import BackgroundScrollSection from './components/BackgroundScrollSection/BackgroundScrollSection';
+import SectionZoom from './components/SectionZoom/SectionZoom';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <BackgroundScrollSection />
+      <SectionZoom />
     </div>
   );
 }

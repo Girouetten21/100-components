@@ -1,0 +1,98 @@
+/*
+ * Contenedor principal para evitar problemas de margin/padding
+ * con el pinning de ScrollTrigger
+ */
+.scroll-container {
+    width: 100%;
+    min-height: 100vh;
+}
+
+/*
+ * Estilos base proporcionados y aplicados a las secciones de Inicio y Fin
+ * (usando la clase .section-hero)
+ */
+.section-hero,
+.section-background {
+    /* Tu ancho y alto especificado */
+    width: calc(100vw - 50px);
+    height: calc(100vh - 40px);
+    max-width: 100%;
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    //background: #ededed;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 32px;
+    overflow: hidden;
+    /* Estilos generales de texto/fondo */
+    color: #333;
+    font-family: sans-serif;
+    font-size: 1.5em;
+    margin: 20px;
+}
+
+.section-hero{
+    background: #ededed;
+}
+
+/*
+ * Estilos específicos para la sección que contiene la animación.
+ */
+.section-background {
+    //background: #000;
+    position: relative;
+    color: white;
+}
+
+/* * Estilos para el texto centrado que debe quedar encima de la imagen 
+ */
+.content-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Asegura que quede encima de la imagen */
+    text-align: center;
+    padding: 20px;
+}
+
+/* * Estilos iniciales para la imagen que se va a animar.
+ * 200x200px centrado.
+ */
+.background-image-zoom {
+    width: 430px;
+    height: 205px;
+    border-radius: 10px;
+    object-fit: cover;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Mueve la imagen de vuelta para que esté centrada */
+    transform: translate(-50%, -50%); 
+    z-index: 1; /* Queda detrás del texto */
+    /* Transición inicial desactivada. GSAP manejará la transformación. */
+}
+
+.text-panels-grid {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    z-index: 3;
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 0; /* Initially invisible */
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
