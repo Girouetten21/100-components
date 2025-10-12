@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './SectionZoom.css'; // Importa los estilos
 import backgroundImage from './img/01.jpg';
+import heroImage from './img/Hero.jpg';
 
 // Registra el plugin de ScrollTrigger una sola vez
 gsap.registerPlugin(ScrollTrigger);
@@ -14,68 +15,65 @@ const SectionZoom: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (!backgroundRef.current || !imageRef.current || !containerRef.current) return;
+        const backgroundElement = backgroundRef.current;
+        const imageElement = imageRef.current;
+        const containerElement = containerRef.current;
 
-        // El contexto de GSAP ayuda a limitar la animación a este componente
+        if (!backgroundElement || !imageElement || !containerElement) {
+            return;
+        }
+
         const ctx = gsap.context(() => {
-
-            // Centrar la imagen inicialmente
-            gsap.set(imageRef.current, {
+            gsap.set(imageElement, {
                 xPercent: -50,
                 yPercent: -50,
                 top: '50%',
                 left: '50%',
             });
 
-            // Calcular la escala necesaria para cubrir la sección
             const scaleValue = Math.max(
-                backgroundRef.current.offsetWidth / imageRef.current.offsetWidth,
-                backgroundRef.current.offsetHeight / imageRef.current.offsetHeight
+                backgroundElement.offsetWidth / imageElement.offsetWidth,
+                backgroundElement.offsetHeight / imageElement.offsetHeight
             );
 
-            // 1. Configuración de ScrollTrigger para la sección de Background (Pinning)
             const tl = gsap.timeline({
                 scrollTrigger: {
-                    trigger: backgroundRef.current,
+                    trigger: backgroundElement,
                     start: 'top-=20 top',
-                    end: '+=200%', 
-                    pin: true, // Fija la sección en el viewport
-                    scrub: 1, // Vincula la animación al movimiento de scroll
+                    end: '+=200%',
+                    pin: true,
+                    scrub: 1,
                     pinSpacing: true,
-                }
+                },
             });
 
-            // 2. Animación de Zoom de la Imagen
-            tl.to(imageRef.current, {
+            tl.to(imageElement, {
                 scale: scaleValue,
                 ease: 'none',
             });
 
-            // 3. Animación de los paneles de texto
             tl.to('.panel', {
                 opacity: 1,
                 stagger: 0.2,
-                ease: 'power2.inOut'
-            }, "-=0.5");
+                ease: 'power2.inOut',
+            }, '-=0.5');
+        }, containerElement);
 
-        }, containerRef); 
-
-        // Función de limpieza: Elimina las instancias de ScrollTrigger y GSAP
-        return () => ctx.revert(); 
-    }, []); 
+        return () => ctx.revert();
+    }, []);
 
     return (
         <div className="scroll-container" ref={containerRef}>
             {/* 1. SECCIÓN DE INICIO */}
-            <section id="inicio" className="section-hero">
-                <h1>🚀 Sección de Inicio</h1>
+            <section id="inicio" className="section-hero" style={{ backgroundImage: `url(${heroImage})` }}>
+                <h1>🚀 Sección Inicial 🚀</h1>
             </section>
 
             {/* 2. SECCIÓN DE BACKGROUND (Con Animación) */}
             <section ref={backgroundRef} id="background" className="section-background">
                 {/* Contenido en el centro, encima de la imagen */}
                 <div className="content-center">
-                    <h2>Scroll para hacer zoom</h2>
+                    <h2>(Scroll para hacer zoom)</h2>
                 </div>
                 
                 {/* Imagen animada */}
@@ -89,27 +87,27 @@ const SectionZoom: React.FC = () => {
                 {/* Paneles de texto */}
                 <div className="text-panels-grid">
                     <div className="panel">
-                        <h3>Exploración Cósmica</h3>
-                        <p>Descubre las maravillas del universo y los secretos que se esconden en las estrellas.</p>
+                        <h3>Singularidad</h3>
+                        <p>Aquí, la densidad y la curvatura del espacio-tiempo son infinitas, marcando el fin de la validez de la relatividad general clásica.</p>
                     </div>
                     <div className="panel">
-                        <h3>Tecnología Avanzada</h3>
-                        <p>La innovación nos impulsa hacia el futuro, creando herramientas para nuevos descubrimientos.</p>
+                        <h3>Horizonte</h3>
+                        <p>Una vez que la materia o la luz cruzan el horizonte de sucesos, la velocidad necesaria para escapar es mayor que la velocidad de la luz.</p>
                     </div>
                     <div className="panel">
-                        <h3>Nuevos Horizontes</h3>
-                        <p>Cada viaje nos lleva más allá de los límites conocidos, hacia lo inexplorado.</p>
+                        <h3>Masa</h3>
+                        <p>Según el "teorema de no pelo", los agujeros negros se definen por solo tres propiedades: masa, momento angular (rotación) y carga eléctrica.</p>
                     </div>
                     <div className="panel">
-                        <h3>El Futuro es Ahora</h3>
-                        <p>Somos los arquitectos de mañana, construyendo un legado para las generaciones venideras.</p>
+                        <h3>Rotación</h3>
+                        <p>Una propiedad llamada rotación o spin, este giro arrastra el espacio-tiempo que lo rodea, creando una región llamada ergosfera.</p>
                     </div>
-                </div>
+                </div>  
             </section>
 
             {/* 3. SECCIÓN FINAL */}
-            <section id="final" className="section-hero">
-                <h1>🎉 Sección Final</h1>
+            <section id="final" className="section-hero" style={{ backgroundImage: `url(${heroImage})` }}>
+                <h1>🚀 Sección Final 🚀</h1>
             </section>
         </div>
     );

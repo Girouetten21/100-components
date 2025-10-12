@@ -1,0 +1,38 @@
+.container-loader {
+  display: flex;
+  flex-wrap: wrap;
+  place-content: center;
+
+  .loader {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    position: relative;
+    transform-style: preserve-3d;
+    transform: perspective(500px) rotateX(60deg);
+
+    @media (width <= 1111px) {
+      zoom: 0.7;
+    }
+
+    .aro {
+      position: absolute;
+      inset: calc(var(--s) * 10px);
+      border: 1px solid rgb(1, 255, 234);
+      background-color: rgba(13, 253, 193, 0.133);
+      clip-path: polygon(0 100%, 50% 0, 100% 100%);
+      animation: up_and_down 3s infinite ease-in-out both;
+      animation-delay: calc(var(--s) * -0.1s);
+    }
+  }
+}
+
+@keyframes up_and_down {
+  0%,
+  100% {
+    transform: translateZ(-100px);
+  }
+  50% {
+    transform: translateZ(100px);
+  }
+}
