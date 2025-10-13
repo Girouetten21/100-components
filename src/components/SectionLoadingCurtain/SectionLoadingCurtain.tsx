@@ -30,14 +30,14 @@ const SectionLoadingCurtain = () => {
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       const t1 = gsap.timeline({
-        delay: 3,
+        delay: 2,
         onComplete: () => {
           setShow(false);
         },
       });
       t1.to(loader.current, {
         y: '-100%',
-        duration: 0.5,
+        duration: 1.5,
         ease: 'sine.inOut',
       })
         .to(
