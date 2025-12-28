@@ -20,8 +20,10 @@ const Loading = () => (
 
 const SectionLoadingCurtain = () => {
   const [show, setShow] = useState(true);
+  const [showLoaderContent, setShowLoaderContent] = useState(true);
   const comp = useRef<HTMLDivElement>(null);
   const loader = useRef<HTMLDivElement>(null);
+  const loaderContentRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const topLeftRef = useRef<HTMLDivElement>(null);
   const centerContentRef = useRef<HTMLDivElement>(null);
@@ -35,11 +37,23 @@ const SectionLoadingCurtain = () => {
           setShow(false);
         },
       });
-      t1.to(loader.current, {
-        y: '-100%',
-        duration: 1.5,
-        ease: 'sine.inOut',
+      t1.to(loaderContentRef.current, {
+        opacity: 0,
+        duration: 0.25,
+        ease: 'power2.in',
       })
+        .call(() => {
+          setShowLoaderContent(false);
+        })
+        .to(
+          loader.current,
+          {
+            y: '-100%',
+            duration: 1,
+            ease: 'sine.inOut',
+          },
+          0
+        )
         .to(
           sectionRef.current,
           {
@@ -91,11 +105,10 @@ const SectionLoadingCurtain = () => {
   return (
     <div className="SectionLoadingCurtain" ref={comp}>
       {show && (
-        <div
-          ref={loader}
-          className="loading-container"
-        >
-          <Loading />
+        <div ref={loader} className="loading-container">
+          <div ref={loaderContentRef}>
+            {showLoaderContent && <Loading />}
+          </div>
         </div>
       )}
       <section className="section" ref={sectionRef}>
@@ -107,13 +120,19 @@ const SectionLoadingCurtain = () => {
         </div>
         <div className="center-content" ref={centerContentRef}>
           <h1>DISCOVER THE GREEN LADY</h1>
-          <h2>A journey that will leave you speechless: capture the aurora at its peak.</h2>
-          <h2>Prepare your camera and your coat: unforgettable memories await.</h2>
+          <h2>
+            A journey that will leave you speechless: capture the aurora at its
+            peak.
+          </h2>
+          <h2>
+            Prepare your camera and your coat: unforgettable memories await.
+          </h2>
         </div>
         <div className="bottom-right-box" ref={bottomRightRef}>
           <h3>The beautiful lights</h3>
           <p>
-            Discover our beauty gallery and let the magic inspire you. Ready to witness the wonder? Let's start planning!
+            Discover our beauty gallery and let the magic inspire you. Ready to
+            witness the wonder? Let's start planning!
           </p>
           <button>
             <span>Go to Gallery</span>

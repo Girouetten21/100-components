@@ -1,10 +1,10 @@
-import SectionLoadingCurtain from './components/SectionLoadingCurtain/SectionLoadingCurtain';
+import GridMiddleScroll from './components/GridMiddleScroll/GridMiddleScroll';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <SectionLoadingCurtain />
+      <GridMiddleScroll />
     </div>
   );
 }
